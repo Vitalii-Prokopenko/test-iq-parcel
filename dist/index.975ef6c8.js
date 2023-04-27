@@ -561,8 +561,11 @@ var _menu = require("./js/menu");
 var _refs = require("./js/refs");
 var _testItems = require("./js/test-items");
 var _startTest = require("./js/start-test");
+var _renderTestHeader = require("./js/render-test-header");
+var _renderTestQuestion = require("./js/render-test-question");
+var _renderTestCompletionTrack = require("./js/render-test-completion-track");
 
-},{"./js/menu":"dTgwB","./js/refs":"2WoF2","./js/test-items":"iNIuW","./js/start-test":"dtKAy"}],"dTgwB":[function(require,module,exports) {
+},{"./js/menu":"dTgwB","./js/refs":"2WoF2","./js/test-items":"iNIuW","./js/start-test":"dtKAy","./js/render-test-header":"dtL7i","./js/render-test-completion-track":"2VNBB","./js/render-test-question":"eg18s"}],"dTgwB":[function(require,module,exports) {
 var _refs = require("./refs");
 const handleOpenMenuClick = ()=>{
     (0, _refs.refs).btnContainer.classList.add("is-open");
@@ -602,7 +605,13 @@ const refs = {
     menuTest: document.querySelector(".js-menu-test"),
     // Start test
     btnStartTest: document.querySelectorAll(".js-start"),
-    appBody: document.querySelector("body")
+    appBody: document.querySelector("body"),
+    // Header
+    headerWrap: document.querySelector(".js-header-wrap"),
+    // Main
+    appMain: document.querySelector(".app-main"),
+    // Footer
+    appFooter: document.querySelector(".app-footer")
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
@@ -815,23 +824,97 @@ const testItems = [
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dtKAy":[function(require,module,exports) {
 var _refs = require("./refs");
-// import { renderHeaderWrap } from './render-header-wrap';
+var _renderTestHeader = require("./render-test-header");
+var _renderTestCompletionTrack = require("./render-test-completion-track");
 const handleClickOnStartBtn = (event)=>{
     const target = event.target;
     console.log(target);
     if (event.target.nodeName !== "BUTTON") return;
     console.log("hello");
-// Render header for test
-//   renderHeaderWrap();
+    // Clean main and footer
+    (0, _refs.refs).appMain.innerHTML = "";
+    (0, _refs.refs).appFooter.innerHTML = "";
+    // Render header for test
+    (0, _renderTestHeader.renderTestHeaderWrap)();
+    // Render progress bar
+    //   renderTestCompletionTrack();
+    0, _renderTestCompletionTrack.renderTestCompletionTrack;
 };
 const handleClickOnMenuStartLink = ()=>{
     console.log("hello");
-// Render header for test
-//   renderHeaderWrap();
+    // Clean main and footer
+    (0, _refs.refs).appMain.innerHTML = "";
+    (0, _refs.refs).appFooter.innerHTML = "";
+    // Render header for test
+    (0, _renderTestHeader.renderTestHeaderWrap)();
+    // Render progress bar
+    //   renderTestCompletionTrack();
+    0, _renderTestCompletionTrack.renderTestCompletionTrack;
 };
 (0, _refs.refs).appBody.addEventListener("click", handleClickOnStartBtn);
 (0, _refs.refs).menuTest.addEventListener("click", handleClickOnMenuStartLink);
 
-},{"./refs":"2WoF2"}]},["jC2qd","8lqZg"], "8lqZg", "parcelRequire94c2")
+},{"./refs":"2WoF2","./render-test-header":"dtL7i","./render-test-completion-track":"2VNBB"}],"dtL7i":[function(require,module,exports) {
+// Function to render header elements for test
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "renderTestHeaderWrap", ()=>renderTestHeaderWrap);
+var _refs = require("./refs");
+const renderTestHeaderWrap = ()=>{
+    const markupTestHeaderWrap = `
+    <picture class="header__brain-picture">
+            <source
+              srcset="./images/webp/brain.webp 1x, ./images/webp/brain-@2x.webp 2x"
+              type="image/webp"
+            />
+            <source
+              srcset="./images/png/brain.png 1x, ./images/png/brain-@2x.png 2x"
+              type="image/png"
+            />
+            <img
+              class="header__brain-img"
+              src="./images/png/brain.png"
+              alt="brain"
+              width="46"
+              height="46"
+            />
+          </picture>
+          <p class="header__text">тест на определение IQ</p>
+          `;
+    (0, _refs.refs).headerWrap.insertAdjacentHTML("beforeend", markupTestHeaderWrap);
+};
+
+},{"./refs":"2WoF2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2VNBB":[function(require,module,exports) {
+// Function to render test completion track
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "markupTestCompletionTrack", ()=>markupTestCompletionTrack);
+var _refs = require("./refs");
+const markupTestCompletionTrack = `
+        <div class="test__track-wrap">
+          <div class="test__track"></div>
+          <div class="test__track-completion"></div>
+        </div>
+          `;
+
+},{"./refs":"2WoF2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eg18s":[function(require,module,exports) {
+// Function to render test question
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "renderTestQuestion", ()=>renderTestQuestion);
+var _refs = require("./refs");
+var _renderTestCompletionTrack = require("./render-test-completion-track");
+const renderTestQuestion = ()=>{
+    const markupTestQuestion = `
+    <section class="test">
+      <div class="container test__container">
+      ${(0, _renderTestCompletionTrack.markupTestCompletionTrack)}
+      </div>
+    </section>
+          `;
+    (0, _refs.refs).appMain.insertAdjacentHTML("beforeend", markupTestQuestion);
+};
+
+},{}]},["jC2qd","8lqZg"], "8lqZg", "parcelRequire94c2")
 
 //# sourceMappingURL=index.975ef6c8.js.map

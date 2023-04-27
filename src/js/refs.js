@@ -10,4 +10,13 @@ export const refs = {
   // Start test
   btnStartTest: document.querySelectorAll('.js-start'),
   appBody: document.querySelector('body'),
+
+  // Header
+  headerWrap: document.querySelector('.js-header-wrap'),
+
+  // Main
+  appMain: document.querySelector('.app-main'),
+
+  // Footer
+  appFooter: document.querySelector('.app-footer'),
 };
