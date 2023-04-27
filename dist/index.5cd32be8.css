@@ -176,6 +176,7 @@ body {
 }
 
 .header__container {
+  height: 100%;
   -moz-column-gap: 9px;
   grid-template-columns: 24px minmax(25px, auto);
   column-gap: 9px;
