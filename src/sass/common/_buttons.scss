@@ -1,0 +1,47 @@
+/* BUTTONS */
+
+.btn-start {
+  @extend %btn;
+  width: 189px;
+  height: 41px;
+  @include myTransition(box-shadow);
+
+  &:hover,
+  &:focus {
+    box-shadow: inset 0px 8px 20px $btnDisabledShadowColor;
+  }
+
+  &--big {
+    width: 200px;
+    height: 44px;
+    border-radius: 50px;
+  }
+
+  &--transparent {
+    color: $mainColor;
+    border: 1px solid $mainColor;
+    background: transparent;
+    border-radius: 50px;
+    @include myTransition(background-color);
+    @include myTransition(color);
+
+    &:hover,
+    &:focus {
+      background-color: $accentColor;
+      color: $secondaryColor;
+    }
+  }
+}
+
+.btn-next {
+  @extend %btn;
+  
+  width: 189px;
+  height: 41px;
+
+  &.disabled {
+    color: $btnDisabledTextColor;
+    background: $btnDisabledBgColor;
+    box-shadow: inset 0px 4px 10px $btnDisabledShadowColor;
+  }
+}
